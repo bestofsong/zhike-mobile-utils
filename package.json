@@ -1,0 +1,25 @@
+{
+  "name": "zhike-mobile-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ZKUtils.js",
+  "dependencies": {
+    "zhike-mobile-logger": "^1.0.0",
+    "zhike-mobile-error": "^1.0.0",
+    "zhike-mobile-strings": "^1.0.0",
+    "zhike-mobile-navigation": "^1.0.0"
+   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bestofsong/zhike-mobile-utils.git"
+  },
+  "author": "wansong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bestofsong/zhike-mobile-utils/issues"
+  },
+  "homepage": "https://github.com/bestofsong/zhike-mobile-utils#readme"
+}
