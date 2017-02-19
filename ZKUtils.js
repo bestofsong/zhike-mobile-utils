@@ -26,8 +26,6 @@ type ExportedType = {
   mergedStyle: (...args:Array<any>) => any
 };
 
-// fixme: this actually works, but dont know why there is the warning
-const BatchedBridge = require('BatchedBridge');
 function div(divident, divisor) {
   if (!divisor) {
     throw new Error('divisor must not be 0');
@@ -371,7 +369,3 @@ const exported:ExportedType = {
 };
 
 module.exports = exported;
-BatchedBridge.registerCallableModule(
-  'ZKUtils',
-  exported
-);
