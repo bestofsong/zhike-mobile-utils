@@ -23,7 +23,8 @@ type ExportedType = {
   timeToDateWithZero: (timestamp:string) => string,
   intervalInDays: (date1:string|Object, date2:string|Object) => number,
   removeHTMLTag: (str: string) => string,
-  mergedStyle: (...args:Array<any>) => any
+  mergedStyle: (...args:Array<any>) => any,
+  getWholeCharAndI: (str:string, i:number) => [string, number]
 };
 
 function div(divident, divisor) {
@@ -364,6 +365,44 @@ const exported:ExportedType = {
       []
     );
   },
+
+  getWholeCharAndI(str, i) {
+    const code = str.charCodeAt(i);
+
+    if (Number.isNaN(code)) {
+      return ''; // Position not found
+    }
+    if (code < 0xD800 || code > 0xDFFF) {
+      return [str.charAt(i), i]; // Normal character, keeping 'i' the same
+    }
+
+    // High surrogate (could change last hex to 0xDB7F to treat high private
+    // surrogates as single characters)
+    if (code >= 0xD800 && code <= 0xDBFF) {
+      if (str.length <= (i + 1)) {
+        throw new Error('High surrogate without following low surrogate');
+      }
+      const next = str.charCodeAt(i + 1);
+      if (next < 0xDC00 || next > 0xDFFF) {
+        throw new Error('High surrogate without following low surrogate');
+      }
+      return [str.charAt(i) + str.charAt(i + 1), i + 1];
+    }
+    // Low surrogate (0xDC00 <= code && code <= 0xDFFF)
+    if (i === 0) {
+      throw new Error('Low surrogate without preceding high surrogate');
+    }
+    const prev = str.charCodeAt(i - 1);
+
+    // (could change last hex to 0xDB7F to treat high private surrogates
+    // as single characters)
+    if (prev < 0xD800 || prev > 0xDBFF) {
+      throw new Error('Low surrogate without preceding high surrogate');
+    }
+    // Return the next character instead (and increment)
+    return [str.charAt(i + 1), i + 1];
+  },
+
   handleError: ErrorHandler.prototype.handleError.bind(Singleton),
   __PRIVATE_SINGLETON: Singleton, // refer the object to keep it from being released?
 };
