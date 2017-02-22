@@ -24,7 +24,8 @@ type ExportedType = {
   intervalInDays: (date1:string|Object, date2:string|Object) => number,
   removeHTMLTag: (str: string) => string,
   mergedStyle: (...args:Array<any>) => any,
-  getWholeCharAndI: (str:string, i:number) => [string, number]
+  getWholeCharAndI: (str:string, i:number) => [string, number],
+  handleError: (...args:Array<any>) => any,
 };
 
 function div(divident, divisor) {
