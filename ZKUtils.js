@@ -15,7 +15,7 @@ import { navigationPushGlobal } from 'zhike-mobile-navigation/actions';
 
 type ExportedType = {
   config: (config:Object) => void,
-  toHHMMSS: (timeString:string) => string,
+  toHHMMSS: (timeString:string|number) => string,
   toYYMMdd: (date:number | string | Object) => string,
   toTBGBMBKBB: (bytes:number, minUnit?:number) => string,
   numberToDigits: (num:number) => Array<number>,
