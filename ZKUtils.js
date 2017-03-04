@@ -25,7 +25,7 @@ type ExportedType = {
   removeHTMLTag: (str: string) => string,
   mergedStyle: (...args:Array<any>) => any,
   getWholeCharAndI: (str:string, i:number) => [string, number],
-  handleError: (...args:Array<any>) => any,
+  handleError: (error:any, onHandle:() => void, onIgnore:() => void) => void,
 };
 
 function div(divident, divisor) {
@@ -403,9 +403,7 @@ const exported:ExportedType = {
     // Return the next character instead (and increment)
     return [str.charAt(i + 1), i + 1];
   },
-
   handleError: ErrorHandler.prototype.handleError.bind(Singleton),
-  __PRIVATE_SINGLETON: Singleton, // refer the object to keep it from being released?
 };
 
 module.exports = exported;
