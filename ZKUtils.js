@@ -15,7 +15,7 @@ import { navigationPushGlobal } from 'zhike-mobile-navigation/actions';
 
 type ExportedType = {
   config: (config:Object) => void,
-  toHHMMSS: (timeString:string|number) => string,
+  toHHMMSS: (timeString:string) => string,
   toYYMMdd: (date:number | string | Object) => string,
   toTBGBMBKBB: (bytes:number, minUnit?:number) => string,
   numberToDigits: (num:number) => Array<number>,
@@ -167,7 +167,7 @@ function ErrorHandlerFactory(module) {
               onErrorHandled && onErrorHandled();
               module.exports.store && module.exports.store.dispatch && module.exports.store.dispatch(
                 navigationPushGlobal({
-                  key:'loginScene',
+                  key:'loginView',
                   modal: true,
                   modalLevel: 50,
                 })
@@ -341,7 +341,8 @@ const exported:ExportedType = {
   intervalInDays: (d1, d2) => {
     d1 = typeof d1 === 'string' ? new Date(d1) : d1;
     d2 = typeof d2 === 'string' ? new Date(d2) : d2;
-    return Math.floor((d2.getTime() - d1.getTime()) / 86400000.0);
+    const ret = Math.floor((d2.getTime() - d1.getTime()) / 86400000.0);
+    return ret;
   },
 
   numberToDigits: (num:number = 0, length:number = 3, base:number = 10) => {
