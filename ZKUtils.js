@@ -26,6 +26,7 @@ type ExportedType = {
   mergedStyle: (...args:Array<any>) => any,
   getWholeCharAndI: (str:string, i:number) => [string, number],
   handleError: (error:any, onHandle:() => void, onIgnore:() => void) => void,
+  makeHtmlFromBody: (body:string, cssStyles?:string) => string,
 };
 
 function div(divident, divisor) {
@@ -405,6 +406,23 @@ const exported:ExportedType = {
     return [str.charAt(i + 1), i + 1];
   },
   handleError: ErrorHandler.prototype.handleError.bind(Singleton),
+
+  makeHtmlFromBody(style, body) {
+    return (
+`
+<!DOCTYPE html>
+<html>
+<head>
+${style || ''}
+</head>
+<body>
+${body || ''}
+</body>
+</html>
+`
+    );
+  },
+
 };
 
 module.exports = exported;
