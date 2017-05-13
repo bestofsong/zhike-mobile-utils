@@ -1,0 +1,6 @@
+framework module Pods_ZKRNUtils_Tests {
+  umbrella header "Pods-ZKRNUtils_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

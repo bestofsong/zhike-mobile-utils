@@ -1,0 +1,6 @@
+framework module ZKRNUtils {
+  umbrella header "ZKRNUtils-umbrella.h"
+
+  export *
+  module * { export * }
+}

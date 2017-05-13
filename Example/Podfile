@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ZKRNUtils_Example' do
+  pod 'ZKRNUtils', :path => '../'
+
+  target 'ZKRNUtils_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
