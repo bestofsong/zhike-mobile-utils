@@ -7,6 +7,7 @@
 
 import {
   Alert,
+  NativeModules,
 } from 'react-native';
 import Logger from 'zhike-mobile-logger';
 import ErrorMsg from 'zhike-mobile-error';
@@ -27,6 +28,7 @@ type ExportedType = {
   getWholeCharAndI: (str:string, i:number) => [string, number],
   handleError: (error:any, onHandle:() => void, onIgnore:() => void) => void,
   makeHtmlFromBody: (body:string, cssStyles?:string) => string,
+  resizeImage:(fromPath:string, dimensions:{ width?:number, height:number }, callback:(error:any, destPath:string) => void) => void,
 };
 
 function div(divident, divisor) {
@@ -423,6 +425,9 @@ ${body || ''}
     );
   },
 
+  resizeImage(fromPath, dimensions, callback) {
+    NativeModules.ZKRNUtils.resizedImage(fromPath, dimensions, callback);
+  }
 };
 
 module.exports = exported;
