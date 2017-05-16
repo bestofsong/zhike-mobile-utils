@@ -9,6 +9,7 @@ import {
   Alert,
   NativeModules,
 } from 'react-native';
+import _ from 'lodash';
 import Logger from 'zhike-mobile-logger';
 import ErrorMsg from 'zhike-mobile-error';
 import Constants from 'zhike-mobile-strings';
