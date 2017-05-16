@@ -427,7 +427,43 @@ ${body || ''}
 
   resizeImage(fromPath, dimensions, callback) {
     NativeModules.ZKRNUtils.resizedImage(fromPath, dimensions, callback);
-  }
+  },
+
+  shallowEqual,
+
 };
+
+function shallowEqual(a: any, b: any, keysIgnored: Set<string> = new Set(['visible']), reversed: bool = false) {
+  if (a === b) {
+    return true;
+  }
+
+  if (_.isEmpty(a) && _.isEmpty(b)) {
+    return true;
+  }
+  if (_.isEmpty(a) && !_.isEmpty(b)) {
+    return false;
+  }
+  if (!_.isEmpty(a) && _.isEmpty(b)) {
+    return false;
+  }
+  if (typeof a !== 'object' || typeof b !== 'object') {
+    return a === b;
+  }
+  let ret = true;
+  _.forOwn(a, (v, k) => {
+    if (!keysIgnored.has(k) && b[k] !== v) {
+      ret = false;
+      return false;
+    }
+  });
+  if (reversed) {
+    return ret;
+  }
+  if (!ret) {
+    return ret;
+  }
+  return shallowEqual(b, a, keysIgnored, true);
+}
 
 module.exports = exported;
