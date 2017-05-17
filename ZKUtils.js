@@ -30,6 +30,7 @@ type ExportedType = {
   handleError: (error:any, onHandle:() => void, onIgnore:() => void) => void,
   makeHtmlFromBody: (body:string, cssStyles?:string) => string,
   resizeImage:(fromPath:string, dimensions:{ width?:number, height:number }, callback:(error:any, destPath:string) => void) => void,
+  shallowEqual:(a?:any, b?:any, keysIgnored?:Set<string>, reversed?:bool) => bool,
 };
 
 function div(divident, divisor) {
