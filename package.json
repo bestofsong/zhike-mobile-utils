@@ -1,6 +1,6 @@
 {
   "name": "zhike-mobile-utils",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "ZKUtils.js",
   "dependencies": {

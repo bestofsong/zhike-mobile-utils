@@ -233,6 +233,7 @@ function ErrorHandlerFactory(module) {
         alertMsg,
         buttons,
       );
+      Logger.info('ZKUtils show alert, title(%s) msg(%s), buttons(%s): ', alertTitle || 'no title?', alertMsg || 'no msg', JSON.stringify(buttons.map(it => it.text)));
     } else {
       // immediately handle error, no queue
       handleErrorCallback();
