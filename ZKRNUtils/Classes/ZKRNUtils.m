@@ -65,4 +65,10 @@ RCT_EXPORT_METHOD(resizedImage:(NSString *)originalImagePath dimensions:(NSDicti
   }
   return CGSizeMake(originalSize.width / originalSize.height * height, height);
 }
+
+RCT_EXPORT_METHOD(pathForResource:(NSString*)filename extension:(NSString*)ext callback:(RCTResponseSenderBlock)callback) {
+  NSBundle *main = [NSBundle mainBundle];
+  NSString *ret = [main pathForResource:filename ofType:ext];
+  callback(@[ret ?: @""]);
+}
 @end
