@@ -10,10 +10,8 @@ import {
   NativeModules,
 } from 'react-native';
 import _ from 'lodash';
-import Logger from 'zhike-mobile-logger';
 import ErrorMsg from 'zhike-mobile-error';
 import Constants from 'zhike-mobile-strings';
-import { navigationPushGlobal } from 'zhike-mobile-navigation/actions';
 
 type ExportedType = {
   config: (config:Object) => void,
@@ -165,23 +163,7 @@ function ErrorHandlerFactory(module) {
     function () {
       return {
         getDefaultErrorHandler(errorKey) {
-          switch (errorKey) {
-          case 10:
-          case ErrorMsg.ERR_NOT_LOGGED_IN : {
-            return (onErrorHandled, onErrorIgnored) => () => {
-              onErrorHandled && onErrorHandled();
-              module.exports.store && module.exports.store.dispatch && module.exports.store.dispatch(
-                navigationPushGlobal({
-                  key:'loginView',
-                  modal: true,
-                  modalLevel: 50,
-                })
-              );
-            };
-          }
-          default:
-            return (onErrorHandled, onErrorIgnored) => () => (onErrorHandled && onErrorHandled());
-          }
+          return (onErrorHandled, onErrorIgnored) => () => (onErrorHandled && onErrorHandled());
         },
       };
     }
@@ -197,9 +179,9 @@ function ErrorHandlerFactory(module) {
         onErrorIgnored = () => {
           try {
             const errorStr = error instanceof Error ? error.toString() : JSON.stringify(error);
-            Logger.error('ignoring unknown error: %s', errorStr);
+            console.error('ignoring unknown error: %s', errorStr);
           } catch (e) {
-            Logger.error('oh.. that error object cannot be converted to json: %s', error);
+            console.error('oh.. that error object cannot be converted to json: %s', error);
           }
         };
       } else {
@@ -233,7 +215,6 @@ function ErrorHandlerFactory(module) {
         alertMsg,
         buttons,
       );
-      Logger.info('ZKUtils show alert, title(%s) msg(%s), buttons(%s): ', alertTitle || 'no title?', alertMsg || 'no msg', JSON.stringify(buttons.map(it => it.text)));
     } else {
       // immediately handle error, no queue
       handleErrorCallback();
