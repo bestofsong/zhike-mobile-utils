@@ -7,7 +7,7 @@
 //
 
 #import "ZKRNUtils.h"
-#import "UIImage+ZKImageUtility.h"
+@import ZKUtils;
 
 @implementation ZKRNUtils 
 
